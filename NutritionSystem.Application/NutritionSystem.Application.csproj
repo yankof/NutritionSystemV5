@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+    <PackageReference Include="Joseco.Communication.External.Contracts" Version="1.0.1" />
+    <PackageReference Include="Joseco.Outbox.Contracts" Version="1.0.2" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NutritionSystem.Domain\NutritionSystem.Domain.csproj" />
+    <ProjectReference Include="..\NutritionSystem.Integration\NutritionSystem.Integration.csproj" />
+  </ItemGroup>
+
+</Project>

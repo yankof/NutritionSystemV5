@@ -1,0 +1,17 @@
+﻿global using MediatR;
+global using NutritionSystem.Application.Interfaces;
+global using NutritionSystem.Application.Interfaces.Repositories;
+global using NutritionSystem.Domain.Common;
+global using NutritionSystem.Domain.Entities;
+global using System.Linq.Expressions;
+global using NutritionSystem.Application.DTOs;
+global using NutritionSystem.Domain.Events.Nutricionista;
+global using Microsoft.Extensions.Logging;
+global using NutritionSystem.Domain.Events.Evaluacion;
+global using NutritionSystem.Domain.Events.Diagnostico;
+global using NutritionSystem.Domain.Events.Plan;
+global using NutritionSystem.Domain.Enums;
+global using NutritionSystem.Domain.Events.Consulta;
+global using NutritionSystem.Domain.Events.Paciente;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Reflection;

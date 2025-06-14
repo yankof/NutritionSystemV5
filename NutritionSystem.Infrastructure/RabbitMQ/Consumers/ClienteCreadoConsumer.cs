@@ -1,0 +1,32 @@
+﻿using NutritionSystem.Application.Features.Personas.Commands;
+using NutritionSystem.Application.Features.Plan.Commands;
+using NutritionSystem.Integration.Cliente;
+
+namespace NutritionSystem.Infrastructure.RabbitMQ.Consumers;
+public class ClienteCreadoConsumer : IIntegrationMessageConsumer<ClienteCreado>
+{
+    private readonly IMediator _mediator;
+
+    public ClienteCreadoConsumer(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    public async Task HandleAsync(ClienteCreado message, CancellationToken cancellationToken)
+    {
+        CrearPersonaCommand command = new CrearPersonaCommand(
+                message.Id,
+                message.nombre,
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+                );
+
+        await _mediator.Send(command, cancellationToken);
+    }
+}
