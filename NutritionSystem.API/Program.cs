@@ -1,8 +1,10 @@
+//using Nur.Store2025.Observability;
 using NutritionSystem.Application.Features.Diagnostico.Commands;
 using NutritionSystem.Application.Features.Evaluacion.Commands;
 using NutritionSystem.Application.Features.Plan.Commands;
 using NutritionSystem.Domain.Common;
 using NutritionSystem.Infrastructure;
+using NutritionSystem.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +41,7 @@ builder.Services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =
 //// Unit of Work
 //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddObservability();
 // MediatR para comandos, queries Y EVENTOS DE DOMINIO
 builder.Services.AddMediatR(cfg =>
 {

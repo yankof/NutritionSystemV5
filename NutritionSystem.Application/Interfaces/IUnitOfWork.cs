@@ -13,6 +13,6 @@
         IHistorialPacienteRepository HistorialPacientes { get; }
         IReservaRepository Reservas { get; }
 
-        Task<int> CompleteAsync(); // Guarda todos los cambios pendientes en la base de datos
+        Task<int> CompleteAsync(CancellationToken cancellationToken = default); // Guarda todos los cambios pendientes en la base de datos
     }
 }

@@ -25,7 +25,7 @@ public class SaveInOutboxWhenPlanAlimentarioAsignado : INotificationHandler<Plan
         OutboxMessage<DomainEvent> outboxMessage = new(notification);
 
         await _outboxService.AddAsync(outboxMessage);
-        await _unitOfWork.CompleteAsync();
+        await _unitOfWork.CompleteAsync(cancellationToken);
     }
 }
 

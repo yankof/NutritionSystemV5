@@ -67,52 +67,52 @@ namespace NutritionSystem.Infrastructure.Persistence
         // Método para publicar eventos de dominio después de guardar
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            _transactionCount++;
-            // Obtener todos los eventos de dominio de las entidades que se están guardando
+            //_transactionCount++;
+            //// Obtener todos los eventos de dominio de las entidades que se están guardando
+            ////var domainEntities = ChangeTracker.Entries<EntityBase<Guid>>()
+            ////    .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any())
+            ////    .Select(x => x.Entity)
+            ////    .ToList();
             //var domainEntities = ChangeTracker.Entries<EntityBase<Guid>>()
             //    .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any())
-            //    .Select(x => x.Entity)
+            //    .Select(x =>
+            //    {
+            //        var domainEvents = x.Entity
+            //                        .DomainEvents
+            //                        .ToImmutableArray();
+            //        x.Entity.ClearDomainEvents();
+
+            //        return domainEvents;
+            //    })
+            //    .SelectMany(domainEvents => domainEvents)
             //    .ToList();
-            var domainEntities = ChangeTracker.Entries<EntityBase<Guid>>()
-                .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any())
-                .Select(x =>
-                {
-                    var domainEvents = x.Entity
-                                    .DomainEvents
-                                    .ToImmutableArray();
-                    x.Entity.ClearDomainEvents();
 
-                    return domainEvents;
-                })
-                .SelectMany(domainEvents => domainEvents)
-                .ToList();
+            //foreach (var e in domainEntities)
+            //{
+            //    await _mediator.Publish(e, cancellationToken);
 
-            foreach (var e in domainEntities)
-            {
-                await _mediator.Publish(e, cancellationToken);
+            //}
 
-            }
-
-            if (_transactionCount <= 2)
-            {
-                // Guardar los cambios de la base de datos primero
+            //if (_transactionCount <= 2)
+            //{
+            //    // Guardar los cambios de la base de datos primero
                 result = await base.SaveChangesAsync(cancellationToken);
 
-            }
-            else
-            {
-                _transactionCount = _transactionCount - 2;
-            }
-
-            // Publicar los eventos de dominio solo si los cambios se guardaron con éxito
-            //foreach (var entity in domainEntities)
-            //{
-            //    foreach (var domainEvent in entity.DomainEvents)
-            //    {
-            //        await _mediator.Publish(domainEvent); // MediatR publica el evento
-            //    }
-            //    entity.ClearDomainEvents(); // Limpiar los eventos después de publicarlos
             //}
+            //else
+            //{
+            //    _transactionCount = _transactionCount - 2;
+            //}
+
+            //// Publicar los eventos de dominio solo si los cambios se guardaron con éxito
+            ////foreach (var entity in domainEntities)
+            ////{
+            ////    foreach (var domainEvent in entity.DomainEvents)
+            ////    {
+            ////        await _mediator.Publish(domainEvent); // MediatR publica el evento
+            ////    }
+            ////    entity.ClearDomainEvents(); // Limpiar los eventos después de publicarlos
+            ////}
             
 
             return result;

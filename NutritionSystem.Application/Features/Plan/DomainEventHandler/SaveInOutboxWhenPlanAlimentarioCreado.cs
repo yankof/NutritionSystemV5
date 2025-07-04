@@ -19,7 +19,17 @@ public class SaveInOutboxWhenPlanAlimentarioCreado : INotificationHandler<PlanAl
         var correlationId = _correlationIdProvider.GetCorrelationId();
         OutboxMessage<DomainEvent> outboxMessage = new(notification);
 
+        var settings = new Newtonsoft.Json.JsonSerializerSettings
+        {
+            TypeNameHandling = Newtonsoft.Json.TypeNameHandling.None,
+            // Si quieres que el JSON sea legible en la base de datos:
+            // Formatting = Newtonsoft.Json.Formatting.Indented
+        };
+        // Serializa el Content del OutboxMessage a JSON antes de guardarlo
+        string serializedContent = Newtonsoft.Json.JsonConvert.SerializeObject(outboxMessage, settings);
+
         await _outboxService.AddAsync(outboxMessage);
-        await _unitOfWork.CompleteAsync();
+        await _unitOfWork.CompleteAsync(cancellationToken);
     }
+
 }

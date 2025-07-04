@@ -1,5 +1,7 @@
-﻿using Joseco.Outbox.EFCore;
+﻿using Joseco.Outbox.Contracts.Service;
+using Joseco.Outbox.EFCore;
 using Joseco.Outbox.EFCore.Persistence;
+using Microsoft.Extensions.Hosting;
 using NutritionSystem.Application;
 using NutritionSystem.Infrastructure.Extensions;
 using NutritionSystem.Infrastructure.Repositories;
@@ -37,12 +39,11 @@ public static class DependencyInjection
         services.AddScoped<IOutboxDatabase<DomainEvent>, UnitOfWork>()
             .AddOutbox<DomainEvent>();
 
-        
+        //services.Decorate<IOutboxService<DomainEvent>, OutboxTracingService<DomainEvent>>();
 
-        services
-            .AddSecrets(configuration)
-            .AddRabbitMQ()
-            .AddObservability();
+        services.AddSecrets(configuration)
+            .AddObservability()            
+            .AddRabbitMQ();
 
         services.AddAplication();
 
