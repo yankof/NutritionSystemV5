@@ -19,7 +19,8 @@
                 "Fecha del evento: {Fecha}",
                 notification.NutricionistaId,
                 notification.Titulo,
-                notification.DateOccurred);
+                //notification.DateOccurred
+                DateTime.Now);
 
             // Ejemplo: Podrías enviar un correo electrónico aquí, o una notificación push
             // await _emailService.SendWelcomeEmail(notification.NutricionistaId);

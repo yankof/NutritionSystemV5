@@ -1,11 +1,4 @@
-﻿using NutritionSystem.Application.Abstraction;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NutritionSystem.Infrastructure.Observability;
+﻿namespace NutritionSystem.Infrastructure.Observability;
 public class CorrelationIdProvider : ICorrelationIdProvider
 {
     private string _correlationId;

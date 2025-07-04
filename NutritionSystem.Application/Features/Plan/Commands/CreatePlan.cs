@@ -1,15 +1,18 @@
 ﻿    namespace NutritionSystem.Application.Features.Plan.Commands
 {
     //public class CreatePlanCommand : IRequest<Guid>
-    public class CreatePlanCommand : IRequest<PlanCommandDto>
-    {
-        public Guid ConsultaId { get; set; }
-        //public string Descripcion { get; set; }
-        public TipoPlan TipoPlan { get; set; }
-        public TipoStatus TipoStatus { get; set; }
-        public int DiasTratamiento { get; set; }    
+    //public class CreatePlanCommand : IRequest<PlanCommandDto>
+    //{
+    //    public Guid ConsultaId { get; set; }
+    //    //public string Descripcion { get; set; }
+    //    public TipoPlan TipoPlan { get; set; }
+    //    public TipoStatus TipoStatus { get; set; }
+    //    public int DiasTratamiento { get; set; }    
+    //    public Guid IdContrato { get; set; }
 
-    }
+    //}
+    public record CreatePlanCommand(Guid ConsultaId, TipoPlan TipoPlan, TipoStatus TipoStatus, 
+        int DiasTratamiento, string IdContrato) : IRequest<PlanCommandDto>;
 
     public class CreatePlanCommandHandler : IRequestHandler<CreatePlanCommand, PlanCommandDto>
     {
@@ -29,7 +32,12 @@
                 throw new ArgumentException($"La Consulta con ID {request.ConsultaId} no existe.");
             }
 
+            Guid _idContrato = string.IsNullOrEmpty(request.IdContrato) ? Guid.Empty : Guid.Parse(request.IdContrato);
+
             string? tipoPlan = ((int)request.TipoPlan).ToString();
+            string? tipoPlanDescripcion = request.TipoPlan.ToString();
+            string? diasTratamiento = request.DiasTratamiento.ToString();
+
             var plan = new Domain.Entities.Plan(
                 Guid.NewGuid(), // Generar un nuevo ID
                 request.ConsultaId,
@@ -37,7 +45,8 @@
                 request.TipoPlan.ToString(),
                 request.TipoPlan,
                 request.TipoStatus,
-                request.DiasTratamiento
+                request.DiasTratamiento,
+                _idContrato
                 
             );
 
@@ -52,8 +61,8 @@
             { 
                 Id = plan.Id,
                 DiasTratamiento = plan.DiasTratamiento,
-                Descripcion = plan.TipoPlan.ToString(),
-                TipoPlan = ((int)plan.TipoPlan).ToString(),
+                Descripcion = plan.Descripcion.ToString(),
+                TipoPlan = plan.TipoPlanClave.ToString(),
             };
         }
     }

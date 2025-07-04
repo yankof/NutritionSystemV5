@@ -17,7 +17,8 @@
                 notification.DiagnosticoId,
                 notification.ConsultaId,
                 notification.TipoDiagnostico,
-                notification.DateOccurred,
+                //notification.DateOccurred,
+                DateTime.Now,
                 notification.TipoStatus);
 
             // Lógica de negocio secundaria, como registrar en un historial médico electrónico.

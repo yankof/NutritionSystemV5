@@ -29,25 +29,15 @@
                 Id = plan.Id,
                 ConsultaId = plan.ConsultaId,
                 Descripcion = plan.Descripcion,
-                TipoPlan = plan.TipoPlanClave.ToString(),
+                TipoPlan = (TipoPlan)int.Parse(plan.TipoPlanClave),
                 FechaCreacion = plan.FechaCreacion,
                 //TipoStatus = plan.TipoStatus,
-                DiasTratamiento = plan.DiasTratamiento // Convierte el enum a string para el DTO
+                DiasTratamiento = plan.DiasTratamiento, // Convierte el enum a string para el DTO
+                IdContrato = string.IsNullOrEmpty(plan.IdContrato.ToString()) ? "" : plan.IdContrato.ToString(),
                 // Puedes incluir otros campos si es necesario
             };
         }
     }
 
-    // NutritionSystem.Application/Features/Consulta/Queries/ConsultaDto.cs (Crear este archivo)
-    public class PlanDto
-    {
-        public Guid Id { get; set;}     
-        public Guid ConsultaId { get; set; } // FK a Consulta
-        //public string Consulta { get; set; }
-        public string Descripcion { get; set; }
-        public string TipoPlan { get; set; } // Ejemplo: Nutricional, de Ejercicio, etc.
-        public DateOnly FechaCreacion { get; set; }
-        //public TipoStatus TipoStatus { get; set; }
-        public int DiasTratamiento { get; set; }
-    }
+    
 }

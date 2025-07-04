@@ -1,4 +1,6 @@
-﻿using NutritionSystem.Domain.Entities;
+﻿using NutritionSystem.Application.Features.Consultas.Queries;
+using NutritionSystem.Application.Features.Plan.Queries;
+using NutritionSystem.Domain.Entities;
 
 namespace NutritionSystem.API.Controllers
 {
@@ -54,6 +56,16 @@ namespace NutritionSystem.API.Controllers
             }
             _logger.LogInformation("Consulta found with ID: {Id}", id);
             return Ok(plan);
+        }
+        // GET: api/Planes
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PlanDto>>> GetAllPlanes()
+        {
+            _logger.LogInformation("Received GetAllPlanesQuery.");
+            var query = new GetAllPlanQuery();
+            var planes = await _mediator.Send(query);
+            _logger.LogInformation("Returned {Count} planes.", planes.Count());
+            return Ok(planes);
         }
     }
 }

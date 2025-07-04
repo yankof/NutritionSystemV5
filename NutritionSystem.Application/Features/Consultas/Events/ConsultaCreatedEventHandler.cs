@@ -18,7 +18,8 @@
                 notification.PacienteId,
                 notification.NutricionistaId,
                 notification.FechaConsulta,
-                notification.DateOccurred);
+                //notification.DateOccurred
+                DateTime.Now);
 
             // Ejemplo: Podrías enviar un correo de confirmación de la consulta al paciente y nutricionista
             // o crear una entrada en un calendario externo.

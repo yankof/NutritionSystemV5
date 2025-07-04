@@ -6,7 +6,14 @@
 
         // Lista de eventos de dominio generados por esta entidad
         private List<DomainEvent> _domainEvents = new List<DomainEvent>();
-        public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+        //public IReadOnlyCollection<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+        public ICollection<DomainEvent> DomainEvents
+        {
+            get
+            {
+                return _domainEvents;
+            }
+        }
 
         protected void AddDomainEvent(DomainEvent domainEvent)
         {
@@ -16,6 +23,11 @@
         public void ClearDomainEvents()
         {
             _domainEvents.Clear();
+        }
+
+        protected EntityBase()
+        {
+            _domainEvents = new List<DomainEvent>();
         }
     }
 }

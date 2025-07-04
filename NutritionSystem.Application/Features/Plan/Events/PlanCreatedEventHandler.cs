@@ -18,7 +18,8 @@
                 notification.ConsultaId,
                 notification.TipoPlan,
                 notification.Descripcion,
-                notification.DateOccurred,
+                //notification.DateOccurred,
+                DateTime.Now,
                 notification.TipoStatus);
 
             // Lógica de negocio secundaria, como notificar al paciente sobre su nuevo plan.

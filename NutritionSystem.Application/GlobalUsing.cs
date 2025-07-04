@@ -15,3 +15,7 @@ global using NutritionSystem.Domain.Events.Consulta;
 global using NutritionSystem.Domain.Events.Paciente;
 global using Microsoft.Extensions.DependencyInjection;
 global using System.Reflection;
+global using Joseco.Outbox.Contracts.Model;
+global using Joseco.Outbox.Contracts.Service;
+global using NutritionSystem.Application.Abstraction;
+

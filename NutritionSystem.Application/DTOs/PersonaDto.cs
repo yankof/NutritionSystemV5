@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NutritionSystem.Application.DTOs
+﻿namespace NutritionSystem.Application.DTOs
 {
     public class PersonaDto
     {

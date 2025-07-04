@@ -1,8 +1,3 @@
-networks:
-  nurtricenter-net:
-    name: nurtricenter-net
-    driver: bridge
-
 services:
   api-gateway:
     container_name: api-gateway
@@ -154,59 +149,13 @@ services:
       - nurtricenter-net
     restart: on-failure
 
-  nutricionista:
-    container_name: nutricionista
-    image: yankof/nutrition-system:latest
-    ports:
-      - 8081:8080
-    depends_on:
-      - nutrition-db
-      - rabbitmq
-    networks:
-      - nurtricenter-net
-    restart: on-failure
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/swagger"]
-      interval: 15s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
-
-  nutrition-db:
-    container_name: nutrition-db
-    image: yankof/nutrition-db:latest
-    ports:
-      - 1433:1433
-    volumes:
-      - catering-db-data:/var/opt/mssql
-    networks:
-      - nurtricenter-net
-    restart: on-failure
-    environment:
-      SA_PASSWORD: "${SA_PASSWORD}"
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "/opt/mssql-tools/bin/sqlcmd",
-          "-U",
-          "sa",
-          "-P",
-          "${SA_PASSWORD}",
-          "-Q",
-          "select 1",
-        ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
   commercial-api:
     container_name: commercial-api
     image: yh03lhz/nurjhz:latest
     volumes:
       - commercial_vendor:/var/www/html/vendor
-      - ./.commercial/process-events.sh:/usr/local/bin/process-events.sh
-      - ./.commercial/post_deploy.sh:/usr/local/bin/post_deploy.sh
+      - ./.commercial/process-events-fixed.sh:/usr/local/bin/process-events.sh
+      - ./.commercial/post_deploy_fixed.sh:/usr/local/bin/post_deploy.sh
     entrypoint: >
       /bin/bash -c "
         chmod +x /usr/local/bin/post_deploy.sh &&
@@ -263,9 +212,70 @@ services:
       retries: 5
       start_period: 10s
 
+  nutricionista:
+    container_name: nutricionista
+    image: yankof/nutrition-system:latest
+    ports:
+      - 8081:8080
+    depends_on:
+      - nutrition-db
+      - rabbitmq
+    networks:
+      - nurtricenter-net
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/swagger"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+ 
+  nutrition-db:
+    container_name: nutrition-db
+    image: yankof/nutrition-db
+    ports:
+      - 1434:1433
+    volumes:
+      - nutrition-db-data:/var/opt/mssql
+    networks:
+      - nurtricenter-net
+    restart: on-failure
+    environment:
+      SA_PASSWORD: "${SA_PASSWORD_NUTRITION}"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/opt/mssql-tools/bin/sqlcmd",
+          "-U",
+          "sa",
+          "-P",
+          "${SA_PASSWORD_NUTRITION}",
+          "-Q",
+          "select 1",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  nutrition-worker:
+    container_name: nutrition-worker
+    image: yankof/nutrition-worker:latest
+    depends_on:
+      - nutrition-db
+    networks:
+      - nurtricenter-net
+    restart: on-failure
+  
 volumes:
   catering-db-data:
+  nutrition-db-data:
   identity-db-data:
   commercial_vendor:
   commercial_db_data:
   rabbitmq_data:
+
+networks:
+  nurtricenter-net:
+    name: nurtricenter-net
+    driver: bridge

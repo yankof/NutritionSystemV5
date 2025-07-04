@@ -1,4 +1,6 @@
-﻿namespace NutritionSystem.API.Controllers
+﻿using NutritionSystem.Application.Features.Plan.Queries;
+
+namespace NutritionSystem.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -47,6 +49,17 @@
             }
             _logger.LogInformation("Paciente found with ID: {Id}", id);
             return Ok(paciente);
+        }
+
+        // GET: api/Pacientes
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PacienteDto>>> GetAllPacientes()
+        {
+            _logger.LogInformation("Received GetAllPacientesQuery.");
+            var query = new GetAllPacienteQuery();
+            var pacientes = await _mediator.Send(query);
+            _logger.LogInformation("Returned {Count} pacientes.", pacientes.Count());
+            return Ok(pacientes);
         }
 
         // Puedes añadir más endpoints aquí:

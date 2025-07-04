@@ -127,6 +127,7 @@ CREATE TABLE [dbo].[Plan]
     IdConsulta UNIQUEIDENTIFIER not null,
     TipoStatus varchar(10),
     FechaCreacion date,
+    IdContrato UNIQUEIDENTIFIER,
         
 );
 GO

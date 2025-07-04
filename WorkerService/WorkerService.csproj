@@ -9,11 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Joseco.DDD.Core" Version="1.0.0" />
-    <PackageReference Include="Joseco.Outbox.EFCore" Version="1.0.4" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
-    <PackageReference Include="Nur.Store2025.Observability" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />    
   </ItemGroup>
 
   <ItemGroup>

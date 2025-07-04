@@ -2,14 +2,16 @@
 
 namespace NutritionSystem.Application.Features.Consulta.Commands
 {
-    public class CreateConsultaCommand : IRequest<Guid>
-    {
-        public Guid PacienteId { get; set; }
-        public Guid NutricionistaId { get; set; }
-        public DateOnly FechaConsulta { get; set; }
-        //public string Motivo { get; set; }
-        public string Notas { get; set; }
-    }
+    //public class CreateConsultaCommand : IRequest<Guid>
+    //{
+    //    public Guid PacienteId { get; set; }
+    //    public Guid NutricionistaId { get; set; }
+    //    public DateOnly FechaConsulta { get; set; }
+    //    //public string Motivo { get; set; }
+    //    public string Notas { get; set; }
+    //    //public Guid IdContrato { get; set; }
+    //}
+    public record CreateConsultaCommand(Guid PacienteId, Guid NutricionistaId, DateOnly FechaConsulta, string Notas) : IRequest<Guid>;
 
     public class CreateConsultaCommandHandler : IRequestHandler<CreateConsultaCommand, Guid>
     {
@@ -33,12 +35,14 @@ namespace NutritionSystem.Application.Features.Consulta.Commands
             {
                 throw new ArgumentException($"El Nutricionista con ID {request.NutricionistaId} no existe.");
             }
-
+            //Guid _contratoId = Guid.Empty;
+            //_contratoId = request.IdContrato == Guid.Empty ? Guid.Empty : request.IdContrato;
             var consulta = new Domain.Entities.Consulta(
                 Guid.NewGuid(), // Generar un nuevo ID para la consulta
                 request.Notas,
-                request.PacienteId,                
-                request.NutricionistaId
+                request.NutricionistaId,
+                request.PacienteId     
+                //_contratoId
                 //request.FechaConsulta
                 //request.Motivo,
                 

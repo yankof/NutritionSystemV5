@@ -15,7 +15,8 @@
                 "Domain Event: Paciente creado: {PacienteId}. " +
                 "Fecha del evento: {Fecha}",
                 notification.PacienteId,                
-                notification.DateOccurred);
+                //notification.DateOccurred
+                DateTime.Now);
 
             // Lógica de negocio secundaria, como enviar un correo de bienvenida al paciente
             // o notificar a un sistema de gestión de citas.

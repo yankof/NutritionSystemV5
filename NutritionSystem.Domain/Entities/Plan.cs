@@ -14,22 +14,14 @@ namespace NutritionSystem.Domain.Entities
         
         [NotMapped]
         public TipoPlan TipoPlan { get; private set; }
-        //public TipoPlan TipoPlan
-        //{
-        //    get => (TipoPlan)tipoPlanClave;
-        //    set
-        //    {
-        //        tipoPlanClave = (int)value;
-        //        Descripcion = value.ToString();
-        //    }
-        //}
         public DateOnly FechaCreacion { get; private set; }
         public TipoStatus TipoStatus { get; private set; }
         public int DiasTratamiento { get; private set; }
+        public Guid IdContrato { get; private set; }
 
         private Plan() { }
 
-        public Plan(Guid id, Guid consultaId, string descripcion, TipoPlan tipoPlan, TipoStatus tipoStatus, int diasTratamiento)
+        public Plan(Guid id, Guid consultaId, string descripcion, TipoPlan tipoPlan, TipoStatus tipoStatus, int diasTratamiento, Guid idContrato)
         {
             Id = id; // Asigna el ID proporcionado o genera uno si es necesario
             ConsultaId = consultaId;
@@ -39,19 +31,28 @@ namespace NutritionSystem.Domain.Entities
             FechaCreacion = DateOnly.FromDateTime(DateTime.UtcNow);
             DiasTratamiento = diasTratamiento;
             TipoStatus = tipoStatus;
+            IdContrato = idContrato;
 
-            // REGISTRAR EL EVENTO DE DOMINIO:
-            AddDomainEvent(new PlanCreatedEvent(this.Id, this.ConsultaId, this.TipoPlan, this.Descripcion, this.TipoStatus, this.DiasTratamiento));
+            //// REGISTRAR EL EVENTO DE DOMINIO:
+            //AddDomainEvent(new PlanCreatedEvent(this.Id, this.ConsultaId, this.TipoPlan, this.Descripcion, this.TipoStatus, this.DiasTratamiento));
 
             //aqui hacemos el envio a rabbit
             PlanAlimentarioCreado planAlimentarioCreado = new PlanAlimentarioCreado(
+                "",
                 this.Id,
                 this.Descripcion,
                 TipoPlan.ToString(),
-                DiasTratamiento
+                DiasTratamiento,
+                IdContrato
                 );
 
             AddDomainEvent(planAlimentarioCreado);
+
+            PlanAlimentarioAsignado planAlimentarioAsignado = new PlanAlimentarioAsignado(
+                IdContrato,
+                this.Id
+                );
+            AddDomainEvent(planAlimentarioAsignado);
             
         }
 

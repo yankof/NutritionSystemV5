@@ -17,7 +17,8 @@
                 notification.EvaluacionId,
                 notification.ConsultaId,
                 notification.TipoEvaluacion,
-                notification.DateOccurred);
+                //notification.DateOccurred
+                DateTime.Now);
 
             // Lógica de negocio secundaria, como enviar una notificación al paciente
             // o actualizar algún estado en un sistema externo.

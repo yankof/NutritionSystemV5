@@ -7,6 +7,7 @@
         public Guid IdPacient { get; private set; }
         public DateOnly FechaCreacion { get; private set; } // Usando DateOnly
         public EstatusConsulta Estatus { get; private set; }
+        //public Guid IdContrato { get; private set; }
 
         // Propiedades de navegación
         public Nutricionista Nutricionista { get; private set; }
@@ -24,6 +25,7 @@
             Descripcion = descripcion;
             IdNutricionista = idNutricionista;
             IdPacient = idPacient;
+            
             FechaCreacion = DateOnly.FromDateTime(DateTime.UtcNow);
             Estatus = EstatusConsulta.Activa;
         }

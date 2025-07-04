@@ -93,7 +93,7 @@ namespace NutritionSystem.Infrastructure.Persistence
 
             }
 
-            if (_transactionCount == 1)
+            if (_transactionCount <= 2)
             {
                 // Guardar los cambios de la base de datos primero
                 result = await base.SaveChangesAsync(cancellationToken);
@@ -101,7 +101,7 @@ namespace NutritionSystem.Infrastructure.Persistence
             }
             else
             {
-                _transactionCount--;
+                _transactionCount = _transactionCount - 2;
             }
 
             // Publicar los eventos de dominio solo si los cambios se guardaron con éxito

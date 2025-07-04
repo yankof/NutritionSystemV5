@@ -1,4 +1,6 @@
-﻿namespace NutritionSystem.API.Controllers
+﻿using NutritionSystem.Application.Features.Consultas.Queries;
+
+namespace NutritionSystem.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -51,6 +53,16 @@
             return Ok(consulta);
         }
 
+        // GET: api/Consultas
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ConsultaDto>>> GetAllConsultas()
+        {
+            _logger.LogInformation("Received GetAllConsultaQuery.");
+            var query = new GetAllConsultaQuery();
+            var consultas = await _mediator.Send(query);
+            _logger.LogInformation("Returned {Count} consultas.", consultas.Count());
+            return Ok(consultas);
+        }
         // Puedes añadir más endpoints aquí:
         // PUT para actualizar
         // DELETE para eliminar

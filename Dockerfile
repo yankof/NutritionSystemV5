@@ -2,9 +2,6 @@
 
 # Esta fase se usa cuando se ejecuta desde VS en modo rápido (valor predeterminado para la configuración de depuración)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-ENV ASPNETCORE_ENVIRONMENT=Development
-ENV ASPNETCORE_URLS="http://+:8080" 
-ENV connectionStrings__DefaultConnection="Server=192.168.1.144,1433;Database=PacienteDB;User Id=sa;Password=Fr3ddy*123;Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
 USER $APP_UID
 WORKDIR /app
 EXPOSE 8080

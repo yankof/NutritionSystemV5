@@ -32,6 +32,7 @@
             // Agregar la entidad al repositorio
             await _unitOfWork.Personas.AddAsync(persona);
             
+            
             var paciente = new Domain.Entities.Paciente(
                 request.id
             );

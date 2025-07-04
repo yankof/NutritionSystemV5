@@ -1,9 +1,4 @@
-﻿using MediatR;
-using NutritionSystem.Application.Abstraction;
-using Joseco.Outbox.Contracts.Model;
-using Joseco.Outbox.Contracts.Service;
-
-namespace NutritionSystem.Application.Features.Plan.DomainEventHandler;
+﻿namespace NutritionSystem.Application.Features.Plan.DomainEventHandler;
 
 public class SaveInOutboxWhenPlanAlimentarioCreado : INotificationHandler<PlanAlimentarioCreado>
 {

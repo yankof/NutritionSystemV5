@@ -1,5 +1,8 @@
 ﻿using Joseco.Outbox.Contracts.Model;
 using Joseco.Outbox.EFCore.Persistence;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Collections.Immutable;
+
 
 namespace NutritionSystem.Infrastructure.Repositories
 {
@@ -19,6 +22,9 @@ namespace NutritionSystem.Infrastructure.Repositories
         public IHistorialPacienteRepository HistorialPacientes { get; }
         public IReservaRepository Reservas { get; }
 
+        int _transactionCount = 0;
+        private readonly IMediator _mediator;
+
         // El constructor ahora recibe los repositorios ya inyectados
         public UnitOfWork(
             ApplicationDbContext dbContext, // Todavía se necesita para SaveChangesAsync
@@ -31,7 +37,8 @@ namespace NutritionSystem.Infrastructure.Repositories
             IDiagnosticoRepository diagnosticos,
             IPlanRepository planes,
             IHistorialPacienteRepository historialPacientes,
-            IReservaRepository reservas)
+            IReservaRepository reservas,
+            IMediator mediator)
         {
             _dbContext = dbContext;
             _logger = logger;
@@ -48,6 +55,7 @@ namespace NutritionSystem.Infrastructure.Repositories
             Reservas = reservas;
 
             _logger.LogInformation("UnitOfWork initialized.");
+            _mediator = mediator;
         }
 
         public async Task<int> CompleteAsync()
@@ -67,9 +75,10 @@ namespace NutritionSystem.Infrastructure.Repositories
             return _dbContext.OutboxMessages;
         }
 
-        public Task CommitAsync(CancellationToken cancellationToken = default)
+        public async Task CommitAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Saving all changes to the database.");
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

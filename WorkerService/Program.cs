@@ -1,7 +1,8 @@
-using Joseco.DDD.Core.Abstractions;
+//using Joseco.DDD.Core.Abstractions;
 using Joseco.Outbox.EFCore;
-using Nur.Store2025.Observability;
+//using Nur.Store2025.Observability;
 using NutritionSystem.Application;
+using NutritionSystem.Domain.Common;
 using NutritionSystem.Infrastructure;
 
 var builder = Host.CreateApplicationBuilder(args);

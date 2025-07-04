@@ -17,12 +17,12 @@ public class ClienteCreadoConsumer : IIntegrationMessageConsumer<ClienteCreado>
         CrearPersonaCommand command = new CrearPersonaCommand(
                 message.Id,
                 message.nombre,
+                message.apellido,
+                "",
+                message.email,
                 "",
                 "",
-                "",
-                "",
-                "",
-                "",
+                message.direccion,
                 "",
                 ""
                 );

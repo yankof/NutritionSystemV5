@@ -39,6 +39,10 @@ namespace NutritionSystem.Infrastructure.Persistence.Configurations
                 .HasConversion<string>()
                 .HasMaxLength(10);
 
+            builder.Property(p => p.IdContrato)
+                .HasColumnName("IdContrato")
+                .IsRequired();
+
             // Relación de FK
             builder.HasOne(p => p.Consulta)
                 .WithMany(c => c.Planes)

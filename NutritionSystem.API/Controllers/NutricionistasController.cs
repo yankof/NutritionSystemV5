@@ -1,4 +1,7 @@
-﻿namespace NutritionSystem.API.Controllers
+﻿using NutritionSystem.Application.Features.Nutricionista.Queries;
+using NutritionSystem.Application.Features.Plan.Queries;
+
+namespace NutritionSystem.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -49,6 +52,16 @@
             }
             _logger.LogInformation("Nutricionista found with ID: {Id}", id);
             return Ok(nutricionista);
+        }
+        // GET: api/Nutricionistas
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<NutricionistaDto>>> GetAllNutricionistas()
+        {
+            _logger.LogInformation("Received GetAllNutricionistaQuery.");
+            var query = new GetAllNutricionistaQuery();
+            var nutricionistas = await _mediator.Send(query);
+            _logger.LogInformation("Returned {Count} nutricionistas.", nutricionistas.Count());
+            return Ok(nutricionistas);
         }
         // ... (Agrega métodos para Update, Delete, GetAll si los necesitas)
     }
