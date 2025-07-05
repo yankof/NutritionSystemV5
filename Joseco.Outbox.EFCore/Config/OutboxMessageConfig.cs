@@ -37,7 +37,7 @@ internal class OutboxMessageConfig<E>(string schema = "outbox") : IEntityTypeCon
         builder.Property(x => x.SpanId)
             .HasColumnName("spanId");
 
-        var jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.None };
+        var jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         var contentConverter = new ValueConverter<E, string>(
            obj => JsonConvert.SerializeObject(obj, jsonSettings),
            stringValue => JsonConvert.DeserializeObject<E>(stringValue, jsonSettings)

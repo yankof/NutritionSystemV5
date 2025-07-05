@@ -15,8 +15,9 @@ WORKDIR /src
 COPY ["NutritionSystem.API/NutritionSystem.API.csproj", "NutritionSystem.API/"]
 COPY ["NutritionSystem.Application/NutritionSystem.Application.csproj", "NutritionSystem.Application/"]
 COPY ["NutritionSystem.Domain/NutritionSystem.Domain.csproj", "NutritionSystem.Domain/"]
-COPY ["NutritionSystem.Infrastructure/NutritionSystem.Infrastructure.csproj", "NutritionSystem.Infrastructure/"]
 COPY ["NutritionSystem.Integration/NutritionSystem.Integration.csproj", "NutritionSystem.Integration/"]
+COPY ["NutritionSystem.Infrastructure/NutritionSystem.Infrastructure.csproj", "NutritionSystem.Infrastructure/"]
+COPY ["Joseco.Outbox.EFCore/Joseco.Outbox.EFCore.csproj", "Joseco.Outbox.EFCore/"]
 RUN dotnet restore "./NutritionSystem.API/NutritionSystem.API.csproj"
 COPY . .
 WORKDIR "/src/NutritionSystem.API"

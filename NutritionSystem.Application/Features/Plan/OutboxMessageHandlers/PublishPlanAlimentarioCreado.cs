@@ -10,14 +10,14 @@ public class PublishPlanAlimentarioCreado : INotificationHandler<OutboxMessage<P
     {
         _integrationBusService = integrationBusService;
     }
-
+    
     public async Task Handle(OutboxMessage<PlanAlimentarioCreado> notification, CancellationToken cancellationToken)
     {
         NutritionSystem.Integration.PlanAlimentario.PlanAlimentarioCreado message =
-            new NutritionSystem.Integration.PlanAlimentario.PlanAlimentarioCreado(notification.Content.FullName, notification.Content.IdPlanAlimentario,
-            notification.Content.Nombre, notification.Content.Tipo, notification.Content.CantidadDias);
+            new NutritionSystem.Integration.PlanAlimentario.PlanAlimentarioCreado(notification.Content.IdPlanAlimentario,
+            notification.Content.Nombre, notification.Content.Tipo, notification.Content.CantidadDias, notification.Content.IdContrato);
 
-        
+
         await _integrationBusService.PublishAsync(message, "plan-alimentario-creado");
     }
 }

@@ -6,7 +6,7 @@ public class SaveInOutboxWhenPlanAlimentarioCreado : INotificationHandler<PlanAl
     private readonly IUnitOfWork _unitOfWork;
     private readonly ICorrelationIdProvider _correlationIdProvider;
 
-    public SaveInOutboxWhenPlanAlimentarioCreado(IOutboxService<DomainEvent> outboxService, IUnitOfWork unitOfWork, 
+    public SaveInOutboxWhenPlanAlimentarioCreado(IOutboxService<DomainEvent> outboxService, IUnitOfWork unitOfWork,
         ICorrelationIdProvider correlationIdProvider)
     {
         _outboxService = outboxService;
@@ -18,7 +18,7 @@ public class SaveInOutboxWhenPlanAlimentarioCreado : INotificationHandler<PlanAl
     {
         var correlationId = _correlationIdProvider.GetCorrelationId();
         OutboxMessage<DomainEvent> outboxMessage = new(notification);
-                
+
         await _outboxService.AddAsync(outboxMessage);
         await _unitOfWork.CompleteAsync(cancellationToken);
     }

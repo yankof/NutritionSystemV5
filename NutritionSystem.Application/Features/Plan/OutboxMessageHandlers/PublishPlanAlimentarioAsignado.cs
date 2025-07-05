@@ -14,7 +14,7 @@ public class PublishPlanAlimentarioAsignado : INotificationHandler<OutboxMessage
     {
         NutritionSystem.Integration.PlanAlimentario.PlanAlimentarioAsignado message =
             new NutritionSystem.Integration.PlanAlimentario.PlanAlimentarioAsignado(notification.Content.idContrato,
-            notification.Content.IdPlanAlimentario);
+            notification.Content.idPlanAlimentario);
 
         await _integrationBusService.PublishAsync(message, "plan-alimentario-asignado");
     }

@@ -38,7 +38,6 @@ namespace NutritionSystem.Domain.Entities
 
             //aqui hacemos el envio a rabbit
             PlanAlimentarioCreado planAlimentarioCreado = new PlanAlimentarioCreado(
-                "",
                 this.Id,
                 this.Descripcion,
                 TipoPlan.ToString(),
@@ -53,7 +52,7 @@ namespace NutritionSystem.Domain.Entities
                 this.Id
                 );
             AddDomainEvent(planAlimentarioAsignado);
-            
+
         }
 
         public void UpdateDetails(string newDescripcion, TipoPlan newTipoPlan)
