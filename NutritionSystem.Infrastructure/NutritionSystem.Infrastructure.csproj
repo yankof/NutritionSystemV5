@@ -9,7 +9,7 @@
 	<ItemGroup>
 
 		<PackageReference Include="Joseco.Communication.External.RabbitMQ" Version="1.0.0" />
-		<PackageReference Include="Joseco.Outbox.EFCore" Version="1.0.4" />
+		<!--<PackageReference Include="Joseco.Outbox.EFCore" Version="1.0.4" />-->
 		<PackageReference Include="Nur.Store2025.Observability" Version="1.0.0" />
 		<PackageReference Include="Nur.Store2025.Security" Version="1.0.0" />
 
@@ -34,6 +34,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Joseco.Outbox.EFCore\Joseco.Outbox.EFCore.csproj" />
 		<ProjectReference Include="..\NutritionSystem.Application\NutritionSystem.Application.csproj" />
 		<ProjectReference Include="..\NutritionSystem.Integration\NutritionSystem.Integration.csproj" />
 	</ItemGroup>
