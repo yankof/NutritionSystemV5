@@ -1,4 +1,6 @@
 ﻿
+using Joseco.CommunicationExternal.RabbitMQ;
+
 namespace NutritionSystem.Infrastructure.Extensions;
 public static class BrokerExtensions
 {

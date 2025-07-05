@@ -25,6 +25,9 @@
             builder.HasOne(pa => pa.Persona)
                 .WithOne(p => p.Paciente)
                 .HasForeignKey<Paciente>(pa => pa.Id); // La FK es el Id de Paciente
+
+            builder.Ignore("_domainEvents");
+            builder.Ignore(p => p.DomainEvents);
         }
     }
 }

@@ -5,7 +5,7 @@ using NutritionSystem.Domain.Entities;
 using NutritionSystem.Domain.Enums;
 
 namespace NutritionSystem.Infrastructure.RabbitMQ.Consumers;
-public class EvaluacionNutricionalContratadoConsumer : IIntegrationMessageConsumer<EvaluacionNutricionalContratado>
+public class EvaluacionNutricionalContratadoConsumer : Joseco.Communication.External.RabbitMQ.Services.IIntegrationMessageConsumer<EvaluacionNutricionalContratado>
 {
     private readonly IMediator _mediator;
     private readonly IUnitOfWork _unitOfWork;

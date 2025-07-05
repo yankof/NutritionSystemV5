@@ -66,6 +66,9 @@
                 .WithOne(pa => pa.Persona)
                 .HasForeignKey<Paciente>(pa => pa.Id) // Id de Paciente es FK a Persona
                 .IsRequired(false); // Puede que una Persona no sea Paciente
+
+            builder.Ignore("_domainEvents");
+            builder.Ignore(p => p.DomainEvents);
         }
     }
 }

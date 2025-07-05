@@ -48,6 +48,11 @@ namespace NutritionSystem.Infrastructure.Persistence.Configurations
                 .WithMany(c => c.Planes)
                 .HasForeignKey(p => p.ConsultaId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Ignore("_domainEvents");
+            builder.Ignore(p => p.DomainEvents);
+
+
         }
     }
 }

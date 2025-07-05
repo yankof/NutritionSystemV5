@@ -58,6 +58,9 @@ namespace NutritionSystem.Infrastructure.Persistence.Configurations
                 .WithMany(c => c.Diagnosticos)
                 .HasForeignKey(d => d.ConsultaId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Ignore("_domainEvents");
+            builder.Ignore(p => p.DomainEvents);
         }
     }
 }

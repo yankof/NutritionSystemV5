@@ -1,8 +1,5 @@
 ﻿using Joseco.Communication.External.Contracts.Services;
 using Joseco.Outbox.Contracts.Model;
-using Microsoft.VisualBasic;
-using System.Runtime;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NutritionSystem.Application.Features.Plan.OutboxMessageHandlers;
 public class PublishPlanAlimentarioCreado : INotificationHandler<OutboxMessage<PlanAlimentarioCreado>>

@@ -32,7 +32,8 @@ namespace NutritionSystem.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
+            
+            base.OnModelCreating(modelBuilder);
             modelBuilder.AddOutboxModel<DomainEvent>();
 
             // Mapeo de enums (ejemplo de la solución anterior)

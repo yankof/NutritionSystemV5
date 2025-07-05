@@ -33,6 +33,9 @@
             builder.HasOne(n => n.Persona)
                 .WithOne(p => p.Nutricionista)
                 .HasForeignKey<Nutricionista>(n => n.Id); // La FK es el Id de Nutricionista
+
+            builder.Ignore("_domainEvents");
+            builder.Ignore(p => p.DomainEvents);
         }
     }
 }

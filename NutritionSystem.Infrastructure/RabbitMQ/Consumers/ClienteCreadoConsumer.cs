@@ -3,7 +3,7 @@ using NutritionSystem.Application.Features.Plan.Commands;
 using NutritionSystem.Integration.Cliente;
 
 namespace NutritionSystem.Infrastructure.RabbitMQ.Consumers;
-public class ClienteCreadoConsumer : IIntegrationMessageConsumer<ClienteCreado>
+public class ClienteCreadoConsumer : Joseco.Communication.External.RabbitMQ.Services.IIntegrationMessageConsumer<ClienteCreado>
 {
     private readonly IMediator _mediator;
 

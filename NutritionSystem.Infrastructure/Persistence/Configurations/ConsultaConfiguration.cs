@@ -59,6 +59,9 @@
                 .WithOne(p => p.Consulta)
                 .HasForeignKey(p => p.ConsultaId)
                 .OnDelete(DeleteBehavior.Cascade); // Si se borra una consulta, se borran sus planes
+
+            builder.Ignore("_domainEvents");
+            builder.Ignore(p => p.DomainEvents);
         }
     }
 }

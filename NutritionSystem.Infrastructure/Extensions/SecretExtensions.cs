@@ -1,12 +1,18 @@
-﻿namespace NutritionSystem.Infrastructure.Extensions;
+﻿using Nur.Store2025.Observability.Config;
+
+namespace NutritionSystem.Infrastructure.Extensions;
 public static class SecretExtensions
 {
+    private const string JeagerSettingsSecretName = "JaegerSettings";
+    private const string RabbitMqSettingsSecretName = "RabbitMqSettings";
     public static IServiceCollection AddSecrets(this IServiceCollection services, IConfiguration configuration)//, IHostEnvironment environment)
     {
-        string RabbitMqSettingsSecretName = "RabbitMqSettings";
+        //string RabbitMqSettingsSecretName = "RabbitMqSettings";
+
 
         configuration
-            .LoadAndRegister<RabbitMqSettings>(services, RabbitMqSettingsSecretName);
+            .LoadAndRegister<RabbitMqSettings>(services, RabbitMqSettingsSecretName)
+            .LoadAndRegister<JeagerSettings>(services, JeagerSettingsSecretName);
 
         return services;
      
